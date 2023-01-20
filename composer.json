@@ -1,0 +1,39 @@
+{
+  "name": "neoan.io/broadcast",
+  "description": "Uses socket.io broadcasting simplified",
+  "type": "package",
+  "authors": [
+    {
+      "name": "Stefan Roehrl",
+      "email": "neoan@neoan.us"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "NeoanIo\\MarketPlace\\Broadcast\\": "./src"
+    }
+
+  },
+  "scripts": {
+    "post-package-install" : [
+      "NeoanIo\\MarketPlace\\Broadcast\\NpmInstall::install"
+    ],
+    "post-package-update": [
+      "NeoanIo\\MarketPlace\\Broadcast\\NpmInstall::install"
+    ]
+  },
+  "require": {
+    "php-curl-class/php-curl-class": "^9.13",
+    "neoan3-apps/stateless": "^2.0"
+  },
+  "extra": {
+    "npm" : {
+      "dotenv": "^16.0.3",
+      "cors": "^2.8.5",
+      "cross-env": "^7.0.3",
+      "express": "^4.18.2",
+      "jsonwebtoken": "^9.0.0",
+      "socket.io": "^4.5.4"
+    }
+  }
+}
