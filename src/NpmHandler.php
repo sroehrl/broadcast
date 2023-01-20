@@ -3,13 +3,13 @@
 namespace NeoanIo\MarketPlace\Broadcast;
 
 use Composer\Script\Event;
-class NpmInstall
+class NpmHandler
 {
-    static function install(Event $event)
+    static function package(Event $event)
     {
         $composer = $event->getComposer();
         $root = dirname($composer->getConfig()->get('vendor-dir'));
-        $composerFile = json_decode(file_get_contents($root . '/composer.json'), true);
+        $composerFile = json_decode(file_get_contents(dirname(__DIR__,2) . '/composer.json'), true);
 
         $targetPackageFile = self::readJson(
             file_exists($root . '/package.json') ? $root . '/package.json' :
@@ -23,7 +23,6 @@ class NpmInstall
         }
         $result = json_encode($targetPackageFile);
         $fb = file_put_contents($root . '/package.json', $result);
-        echo "file-write: " . $fb;
 
     }
     private static function readJson(string $path): array

@@ -15,15 +15,7 @@
 
   },
   "scripts": {
-    "post-package-install" : [
-      "NeoanIo\\MarketPlace\\Broadcast\\NpmInstall::install"
-    ],
-    "post-package-update": [
-      "NeoanIo\\MarketPlace\\Broadcast\\NpmInstall::install"
-    ],
-    "post-update-cmd": [
-      "NeoanIo\\MarketPlace\\Broadcast\\NpmInstall::install"
-    ]
+
   },
   "require": {
     "php-curl-class/php-curl-class": "^9.13",
