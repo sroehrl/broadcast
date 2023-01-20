@@ -22,7 +22,8 @@ class NpmInstall
             $targetPackageFile['dependencies'][$package] = $version;
         }
         $result = json_encode($targetPackageFile);
-        file_put_contents($root . '/package.json', $result);
+        $fb = file_put_contents($root . '/package.json', $result);
+        echo "file-write: " . $fb;
 
     }
     private static function readJson(string $path): array
