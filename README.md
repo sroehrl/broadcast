@@ -4,6 +4,8 @@ Keep multiple clients & your database in sync!
 
 Designed for [LENKRAD](https://lenkrad.neoan3.rocks), but agnostic enough to be used in any framework.
 
+> Make any database a live-database
+
 ## Installation
 
 ### 1. install package
@@ -172,13 +174,42 @@ class PutNote implements Routable
 // taken from earlier example
 import {SyncEntity, HTMLBinder} from "/client.js";
 
+// allow for programmatic updates on any change (without event)
+// careful: this produces a lot of traffic and is usually not necessary)
+let updateOnAnyChange = true;
+
 // SyncEntity grabs the wrapped entity via GET
 // (the PUT-request needs ot be in the same format)
 // SyncEntity returns a proxy triggering PUT-requests as needed,
 // and receiving updates via socket alike!
-let note = await SyncEntity('/api/note/1')
+let note = await SyncEntity('/api/note/1', updateOnAnyChange)
 
-// let's trigger an update
+// if `updateOnAnyChange` is true, every change will be broadcasted
+setTimeout(()=> {
+    note.content += '!';
+    updateOnAnyChange = false;
+}, 1000)
+
+// however, we usually want to trigger on specific events
+const binder = new HTMLBinder(note)
+// e.g. on form submission
+
+binder.toForm('#my-form')
+
+// or directly on the element-level
+
+binder.toElements({
+    '#my-input':{
+        property: 'content',
+        event: 'blur'
+    }
+})
+
 
 
 ```
+
+## Acknowledgements
+
+The proxy-logic is based on a modified version of Sindre Sorhus' [on-change](https://github.com/sindresorhus/on-change).
+Make sure to leave a star ;-)

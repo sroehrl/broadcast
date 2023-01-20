@@ -33,7 +33,10 @@ const updateEntity = debounce((path, entityObject)=>{
 })
 
 export const SyncEntity = async (path, onAllChanges) => {
-    storeIt = !!onAllChanges
+    if(onAllChanges){
+        storeIt = !!onAllChanges
+    }
+
     const j = await fetch(path)
     const dataObj = await j.json()
     const main = lenkradSocketManager.socket(dataObj.lrs.namespace, {auth:{token:dataObj.lrs.token}})
