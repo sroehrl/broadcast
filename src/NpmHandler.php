@@ -9,7 +9,7 @@ class NpmHandler
     {
         $composer = $event->getComposer();
         $root = dirname($composer->getConfig()->get('vendor-dir'));
-        $composerFile = json_decode(file_get_contents(dirname(__DIR__,2) . '/composer.json'), true);
+        $composerFile = json_decode(file_get_contents(dirname(__DIR__) . '/composer.json'), true);
 
         $targetPackageFile = self::readJson(
             file_exists($root . '/package.json') ? $root . '/package.json' :
