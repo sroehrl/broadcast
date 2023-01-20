@@ -17,6 +17,7 @@
   "scripts": {
 
   },
+  "license": "MIT",
   "require": {
     "php-curl-class/php-curl-class": "^9.13",
     "neoan3-apps/stateless": "^2.0"
